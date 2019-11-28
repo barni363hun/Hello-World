@@ -1,7 +1,6 @@
 <?php
 require_once 'connect.php';
 $_SESSION['hely'] = "Location: registry.php";
-//$_SESSION['mostregisztralt'] = false;
 $sikertelen = false;
 if (isset($_POST['submit'])) {
     if (isset($_POST['username'], $_POST['email'], $_POST['password']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
