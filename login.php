@@ -97,7 +97,7 @@ if ($result = $db->query("
                         } elseif ($bejelentkezesmegprobalva == 2) {
                             echo "Rossz jelszó";
                         } else {
-                            echo "Kérem jelentkezzen be!"; //hj
+                            echo "Kérem jelentkezzen be!"; //hjl
                         }
                     } else {
                         echo "Bejelentkezve mint: ";
