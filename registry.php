@@ -1,19 +1,20 @@
 <?php
 require_once 'connect.php';
 $_SESSION['hely'] = "Location: registry.php";
-$_SESSION['mostregisztralt'] = false;
+//$_SESSION['mostregisztralt'] = false;
 $sikertelen = false;
 if (isset($_POST['submit'])) {
     if (isset($_POST['username'], $_POST['email'], $_POST['password']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+        $beforeusername = $_POST['username'];
+        $beforepassw = $_POST['password'];
+        $beforeemail = $_POST['email'];
         $username = htmlspecialchars(htmlentities($db->real_escape_string(trim($_POST['username']))));
         $password = password_hash(htmlspecialchars(htmlentities($db->real_escape_string(trim($_POST['password'])))), PASSWORD_BCRYPT);
         $email = htmlspecialchars(htmlentities($db->real_escape_string(trim($_POST['email']))));
 
-
         $nametable = $db->query("SELECT `username` FROM `users`")->fetch_all();
         $pwtable = $db->query("SELECT `password` FROM `users`")->fetch_all();
         $vanienfelhnev = false;
-        $vanienpassw = false;
         foreach ($nametable as $row) {
             foreach ($row as $item) {
                 if ($username == $item) {
@@ -43,8 +44,13 @@ $cim = "GRATULÁLOK!";
 $magassag = "100";
 $szelesseg = "200";
 $szoveg = "Sikeres regisztráció";
-echo "
+if ($sikertelen) {
+    $cim = "Hiba";
+    $szoveg = "Ez a felhasználónév már regisztrálva van!";
+    $szelesseg = "300";
+}
 
+echo "
 <link rel='stylesheet' href='pupu.css'>
 <div id='popup' class='popup-wrapper hide'>
     <div class='popup-content'>
@@ -94,7 +100,7 @@ echo "
 
                 <span class="entry-text">
                     <?php
-                    if ($mostregisztralt == true) {
+                    if ($mostregisztralt == true || $sikertelen) {
                         echo "
                             <script>
                             var popupEl = document.getElementById('popup');
@@ -102,11 +108,10 @@ echo "
                             popup.open();
                             </script>";
                     }
+
                     if ($_SESSION['loggedin']) {
                         echo "Bejelentkezve mint: ";
-                        echo $_SESSION['jofelhasznalo'];
-                    } elseif ($sikertelen) {
-                        echo "Ez a felhasználónév már regisztrálva van!";
+                        echo htmlspecialchars_decode(html_entity_decode($_SESSION['jofelhasznalo']));
                     } else {
                         echo "Üdvözöllek a weboldalamon!";
                     }
@@ -123,7 +128,6 @@ echo "
         <div class="mid-wrapper">
             <div class="pehape">
                 <h2>Regisztráció:</h2>
-                <p>Az alábbi karakterek nem használhatóak: </p>
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <table>
                         <tr>

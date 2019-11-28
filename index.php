@@ -13,7 +13,7 @@ $_SESSION['hely'] = "Location: index.php";
 
           if ($_SESSION['loggedin']) {
             echo "Bejelentkezve mint: ";
-            echo $_SESSION['jofelhasznalo'];
+            echo htmlspecialchars_decode(html_entity_decode($_SESSION['jofelhasznalo']));
           } else {
             echo "Üdvözöllek a weboldalamon!";
           }

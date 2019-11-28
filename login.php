@@ -1,6 +1,5 @@
 <?php
 require_once 'connect.php';
-$_SESSION['loggedin'] = false;
 $_SESSION['hely'] = "Location: login.php";
 $bejelentkezesmegprobalva = 0;
 if (isset($_POST['submit'])) {
@@ -91,17 +90,17 @@ if ($result = $db->query("
             <div class="entry-wrapper">
                 <span class="entry-text">
                     <?php
-                    if (!isset($_SESSION['loggedin'])) {
+                    if (isset($_SESSION['loggedin'])) {
+                        echo "Bejelentkezve mint: ";
+                        echo htmlspecialchars_decode(html_entity_decode($_SESSION['jofelhasznalo']));
+                    } else {
                         if ($bejelentkezesmegprobalva == 1) {
                             echo "Rossz felhasználónév";
                         } elseif ($bejelentkezesmegprobalva == 2) {
                             echo "Rossz jelszó";
                         } else {
-                            echo "Kérem jelentkezzen be!"; //hjl
+                            echo "Kérem jelentkezzen be!";
                         }
-                    } else {
-                        echo "Bejelentkezve mint: ";
-                        echo $_SESSION['jofelhasznalo'];
                     }
                     ?>
                 </span>
