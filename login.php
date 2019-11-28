@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $vanienfelhnev = false;
         foreach ($nametable as $row) {
             foreach ($row as $item) {
-                if ($username == $item) { //
+                if ($username == $item) {
                     $vanienfelhnev = true;
                 }
             }
