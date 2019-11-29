@@ -29,6 +29,8 @@ if (isset($_POST['submit'])) {
             VALUES (null,'{$username}','{$email}',NOW(),'{$password}')
             ");
 
+            mkdir("{$username}");
+
             if (isset($_POST['stayloggedin']) && !empty($_POST['stayloggedin'])) {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['jofelhasznalo'] = $username;
@@ -39,14 +41,15 @@ if (isset($_POST['submit'])) {
 }
 
 
-$cim = "GRATULÁLOK!";
-$magassag = "100";
-$szelesseg = "200";
-$szoveg = "Sikeres regisztráció";
 if ($sikertelen) {
     $cim = "Hiba";
     $szoveg = "Ez a felhasználónév már regisztrálva van!";
     $szelesseg = "300";
+} else {
+    $cim = "GRATULÁLOK!";
+    $magassag = "100";
+    $szelesseg = "200";
+    $szoveg = "Sikeres regisztráció";
 }
 
 echo "
