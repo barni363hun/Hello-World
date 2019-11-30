@@ -4,7 +4,7 @@
  * Under the MIT License | (c) 2015 Alex Chao
  */
 
-!(function(global, factory) {
+!(function (global, factory) {
 
   // Uses CommonJS, AMD or browser global to create a jQuery plugin.
   // See: https://github.com/umdjs/umd
@@ -19,7 +19,7 @@
     factory(global.jQuery, global);
   }
 
-}(this, function($, global) {
+}(this, function ($, global) {
 
   'use strict';
 
@@ -37,7 +37,7 @@
     closeBtnClass: 'popup-close'
   };
 
-  var extend = function(to, from) {
+  var extend = function (to, from) {
     for (var p in from) {
       if (from.hasOwnProperty(p)) {
         to[p] = from[p];
@@ -47,27 +47,27 @@
   };
 
   // Get the viewport width.
-  var winW = function() {
+  var winW = function () {
     return win.innerWidth || docEl.clientWidth;
   };
 
   // Get the viewport height.
-  var winH = function() {
+  var winH = function () {
     return win.innerHeight || docEl.clientHeight;
   };
 
   // Get the horizontal scroll offset.
-  var scrollX = function() {
+  var scrollX = function () {
     return win.pageXOffset || docEl.scrollLeft;
   };
 
   // Get the vertical scroll offset.
-  var scrollY = function() {
+  var scrollY = function () {
     return win.pageYOffset || docEl.scrollTop;
   };
 
   // Get elements by className.
-  var byClass = function(cls, el) {
+  var byClass = function (cls, el) {
     el = el || doc;
     if (el.getElementsByClassName) {
       return el.getElementsByClassName(cls);
@@ -81,13 +81,13 @@
           ret.push(tags[i]);
         }
       }
-      
+
       return ret;
     }
   };
 
   // Cross-brower bind event.
-  var bind = function(el, type, listener) {
+  var bind = function (el, type, listener) {
     if (el.addEventListener) {
       el.addEventListener(type, listener, false);
     } else {
@@ -109,7 +109,7 @@
   extend(Popup.prototype, {
 
     // Initialize the element's dimension.
-    init: function() {
+    init: function () {
       var opts = this.opts;
 
       extend(this.el.style, {
@@ -124,15 +124,15 @@
 
     // Bind click events to close button.
     // Press ESC key to close popup.
-    bindEvent: function() {
+    bindEvent: function () {
       var closeBtn = byClass(this.opts.closeBtnClass)[0];
       var self = this;
 
-      bind(closeBtn, 'click', function() {
+      bind(closeBtn, 'click', function () {
         self.close();
       });
-      
-      bind(doc, 'keydown', function(e) {
+
+      bind(doc, 'keydown', function (e) {
         e = e || window.event;
         var keyCode = e.which || e.keyCode;
 
@@ -142,24 +142,24 @@
       });
 
       // When resize the window, reset the element's position.
-      bind(win, 'resize', function() {
+      bind(win, 'resize', function () {
         self.setPosition();
       });
     },
 
     // Show the popup element.
-    open: function() {
+    open: function () {
       this.el.style.display = 'block';
       this.setPosition();
     },
 
     // Hide the popup element.
-    close: function() {
+    close: function () {
       this.el.style.display = 'none';
     },
 
     // Make the popup element be centered.
-    setPosition: function() {
+    setPosition: function () {
       var opts = this.opts;
 
       var top = scrollY() + Math.max(0, (winH() - opts.height) / 2);
@@ -175,20 +175,20 @@
 
   // Expose as a jQuery plugin.
   if ($ && $.fn) {
-    $.fn.popup = function(opts) {
+    $.fn.popup = function (opts) {
       var popups = [];
-      this.each(function(i, el) {
+      this.each(function (i, el) {
         popups.push(new Popup(el, opts));
       });
 
       return {
-        open: function() {
-          $.each(popups, function(i, popup) {
+        open: function () {
+          $.each(popups, function (i, popup) {
             popup.open();
           });
         },
-        close: function() {
-          $.each(popups, function(i, popup) {
+        close: function () {
+          $.each(popups, function (i, popup) {
             popup.close();
           });
         }
