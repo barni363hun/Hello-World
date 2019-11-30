@@ -35,24 +35,20 @@ if (isset($_POST['submit'])) {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['jofelhasznalo'] = $username;
             }
-            $mostregisztralt = true;
+            $_SESSION['mostregisztralt'] = true;
+            header("Location: index.php");
         }
     }
 }
-
-$cim = "GRATULÁLOK!";
-$magassag = "100";
-$szelesseg = "200";
-$szoveg = "Sikeres regisztráció";
 
 if ($sikertelen) {
     $cim = "Hiba";
     $szoveg = "Ez a felhasználónév már regisztrálva van!";
     $szelesseg = "300";
-}
+    $magassag = "100";
 
 
-echo "
+    echo "
 <link rel='stylesheet' href='pupu.css'>
 <div id='popup' class='popup-wrapper hide'>
     <div class='popup-content'>
@@ -68,6 +64,13 @@ echo "
 <script src='simple-popup.js'></script>
 ";
 
+    echo "
+<script>
+var popupEl = document.getElementById('popup');
+var popup = new Popup(popupEl, {width: $szelesseg,height: $magassag});
+popup.open();
+</script>";
+}
 
 /*                       felhasználók adatainak kiírása
                     if ($result = $db->query("SELECT * FROM `users`")) {
@@ -102,14 +105,6 @@ echo "
 
                 <span class="entry-text">
                     <?php
-                    if ($mostregisztralt == true || $sikertelen) {
-                        echo "
-                            <script>
-                            var popupEl = document.getElementById('popup');
-                            var popup = new Popup(popupEl, {width: $szelesseg,height: $magassag});
-                            popup.open();
-                            </script>";
-                    }
 
                     if ($_SESSION['loggedin']) {
                         echo "Bejelentkezve mint: ";

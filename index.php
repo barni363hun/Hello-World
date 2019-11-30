@@ -1,6 +1,40 @@
 <?php
 require_once 'connect.php';
 $_SESSION['hely'] = "Location: index.php";
+if ($_SESSION['mostregisztralt']) {
+
+  $cim = "GRATULÁLOK!";
+  $magassag = "100";
+  $szelesseg = "200";
+  $szoveg = "Sikeres regisztráció";
+
+
+
+  echo "
+<link rel='stylesheet' href='pupu.css'>
+<div id='popup' class='popup-wrapper hide'>
+    <div class='popup-content'>
+        <div class='popup-title'>
+            <button type='button' class='popup-close'>&times;</button>
+            <h3>$cim</h3>
+        </div>
+        <div class='popup-body'>
+            <p>$szoveg</p>
+        </div>
+    </div>
+</div>
+<script src='simple-popup.js'></script>
+";
+
+
+  echo "
+      <script>
+      var popupEl = document.getElementById('popup');
+      var popup = new Popup(popupEl, {width: $szelesseg,height: $magassag});
+      popup.open();
+      </script>";
+  $_SESSION['mostregisztralt'] = false;
+}
 ?>
 <article>
 
