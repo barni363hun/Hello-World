@@ -1,6 +1,7 @@
 <?php
 require_once 'connect.php';
 $_SESSION['hely'] = "Location: index.php";
+$username = $_SESSION['jofelhasznalo'];
 ?>
 <article>
     <div class="background-top background">

@@ -25,33 +25,21 @@ $username = $_SESSION['jofelhasznalo'];
         </div>
     </div>
 
+
     <section class="mid-container">
         <div class="mid-wrapper">
             <?php
-            echo "<h1>" . htmlspecialchars_decode(html_entity_decode($_SESSION['jofelhasznalo'])) . " könyvtára</h1>";
-
             $mydir = getcwd() . "\\" . "users" . "\\" . $username . "\\";
-            $files = scandir($mydir);
-            $onlyfiles = array();
-            foreach ($files as $key => $value) {
-                if ($value != ".." and $value != ".") {
-                    array_push($onlyfiles, $value);
-                }
+            $file = $mydir . $_GET['file'];
+            echo "<h1>" . $_GET['file'] . "</h1>";
+            echo ("<br />");
+
+            $myfile = fopen($file, "r") or die("Nem sikerült beolvasni a fájlt!");
+            while (!feof($myfile)) {
+                echo fgets($myfile) . "<br>";
             }
-            foreach ($onlyfiles as $key => $value) {
-                echo "";
-                echo "
-                <form name='form' method='post' action='/website/deletefile.php' enctype='multipart/form-data'>
-                <a href='openfile.php?file=" . $value . "'>" . $value . "</a>
-                <input type='hidden' name='torlendo' value='" . $mydir . $value . "' />
-                <button type='submit' name='submit'>Törlés</button>
-                </form>
-                ";
-                echo ("<br />");
-            }
+            fclose($myfile);
             ?>
-
-
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php
