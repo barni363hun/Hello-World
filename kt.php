@@ -50,8 +50,7 @@ $username = $_SESSION['jofelhasznalo'];
                 echo ("<br />");
             }
             ?>
-
-
+        </div>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php

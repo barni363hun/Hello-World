@@ -33,6 +33,7 @@ require_once 'connect.php';
                 Kifejezetten nem kéne itt lenned
                 <img src="pictures/39warni.ico" title="warning" alt="warning">
             </marquee>
+        </div>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php

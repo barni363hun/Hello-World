@@ -73,6 +73,7 @@ if ($_SESSION['loggedin'] == false) {
                 <input type="file" name="file">
                 <button type="submit" name="submit">Feltöltés</button>
             </form>
+        </div>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php

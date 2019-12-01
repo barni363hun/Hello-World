@@ -44,7 +44,9 @@
                      <img class="js-popupPlayer" src="pictures/jazzy.png">
                  </a>
              </div>
-             <!--<div 
+         </div>
+     </section>
+     <!--<div 
         data-my-radio-lang="hu" 
         class="embed-radioplayer js-radioplayerData" 
         data-autoplay="false" 
@@ -94,7 +96,7 @@
     data-script="jquery.embed-radioplayer.js" 
     async src="https://myonlineradio.hu/public/jsv190719054843/jquery.embed-script-loader.js">
     </script>-->
-             <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
-             <?php
-                require_once "secondbase.html";
-                ?>
+     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
+     <?php
+        require_once "secondbase.html";
+        ?>

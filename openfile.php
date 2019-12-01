@@ -28,6 +28,7 @@ $username = $_SESSION['jofelhasznalo'];
 
     <section class="mid-container">
         <div class="mid-wrapper">
+            <img src="<?php echo $showimage; ?>" />
             <?php
             $mydir = getcwd() . "\\" . "users" . "\\" . $username . "\\";
             $file = $mydir . $_GET['file'];
@@ -45,7 +46,8 @@ $username = $_SESSION['jofelhasznalo'];
                 $kiterj == "webp" ||
                 $kiterj == "bat"
             ) {
-                echo "<img src='" . $file . "' alt='" . $file . "'>";
+                echo "Ez egy kép";
+                //echo "<img src='" . $file . "' alt='" . $file . "'>";
             } else {
                 $myfile = fopen($file, "r") or die("Nem sikerült beolvasni a fájlt!");
                 while (!feof($myfile)) {
@@ -54,6 +56,7 @@ $username = $_SESSION['jofelhasznalo'];
                 fclose($myfile);
             }
             ?>
+        </div>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php

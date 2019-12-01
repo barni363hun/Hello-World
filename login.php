@@ -135,12 +135,14 @@ if ($result = $db->query("
                     </table>
                 </form>
             </div>
+        </div>
+    </section>
 
 
 
 
 
-            <?php
-            require_once 'secondbase.html';
-            $db->close();
-            ?>
+    <?php
+    require_once 'secondbase.html';
+    $db->close();
+    ?>

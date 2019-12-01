@@ -146,7 +146,9 @@ popup.open();
                     </table>
                 </form>
             </div>
-            <?php
-            require_once 'secondbase.html';
-            $db->close();
-            ?>
+        </div>
+    </section>
+    <?php
+    require_once 'secondbase.html';
+    $db->close();
+    ?>

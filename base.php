@@ -34,6 +34,7 @@ $username = $_SESSION['jofelhasznalo'];
                 A weblap ideiglenesen fejlesztés alatt áll
                 <img src="pictures/39warni.ico" title="warning" alt="warning">
             </marquee>
+        </div>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->
     <?php
