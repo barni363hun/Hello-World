@@ -31,14 +31,28 @@ $username = $_SESSION['jofelhasznalo'];
             <?php
             $mydir = getcwd() . "\\" . "users" . "\\" . $username . "\\";
             $file = $mydir . $_GET['file'];
+
             echo "<h1>" . $_GET['file'] . "</h1>";
             echo ("<br />");
-
-            $myfile = fopen($file, "r") or die("Nem sikerült beolvasni a fájlt!");
-            while (!feof($myfile)) {
-                echo fgets($myfile) . "<br>";
+            $kiterj = pathinfo($mydir . $file, PATHINFO_EXTENSION);
+            if (
+                $kiterj == "jpg" ||
+                $kiterj == "png" ||
+                $kiterj == "jfif" ||
+                $kiterj == "jpeg" ||
+                $kiterj == "gif" ||
+                $kiterj == "bmp" ||
+                $kiterj == "webp" ||
+                $kiterj == "bat"
+            ) {
+                echo "<img src='" . $file . "' alt='" . $file . "'>";
+            } else {
+                $myfile = fopen($file, "r") or die("Nem sikerült beolvasni a fájlt!");
+                while (!feof($myfile)) {
+                    echo fgets($myfile) . "<br>";
+                }
+                fclose($myfile);
             }
-            fclose($myfile);
             ?>
     </section>
     <!--https://support.google.com/youtube/answer/171780?hl=hu youtube playlist-->

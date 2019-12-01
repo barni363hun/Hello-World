@@ -1,0 +1,179 @@
+<?php
+require_once 'connect.php';
+function folderSize($dir)
+{
+    $count_size = 0;
+    $count = 0;
+    $dir_array = scandir($dir);
+    foreach ($dir_array as $key => $filename) {
+        if ($filename != ".." && $filename != ".") {
+            if (is_dir($dir . "/" . $filename)) {
+                $new_foldersize = foldersize($dir . "/" . $filename);
+                $count_size = $count_size + $new_foldersize;
+            } else if (is_file($dir . "/" . $filename)) {
+                $count_size = $count_size + filesize($dir . "/" . $filename);
+                $count++;
+            }
+        }
+    }
+    return $count_size;
+}
+function diverse_array($vector)
+{
+    $result = array();
+    foreach ($vector as $key1 => $value1)
+        foreach ($value1 as $key2 => $value2)
+            $result[$key2][$key1] = $value2;
+    return $result;
+}
+echo "<pre>";
+
+print_r($_FILES);
+
+
+$asd = "lkéáűőpoi";
+mkdir($asd);
+
+echo folderSize($asd);
+
+
+
+
+/*
+
+
+$szöv = "asdfghjkléáűqwertzuiopőúíyxcvbnm,.-123456789öüó785623<>#&*>;<}{@&#¤ßŁłí][&Đ#Đ×÷Í€˙Ä|¸¨˝´˙`˛°˘^ˇ~'+!%/=()ÖÜÓÓÚŰÁŐÉPLKJHGBN ?M:";
+echo $szöv;
+echo ("<br />");
+
+echo "-----------------------------------------------------------------------------------------------------------------";
+echo ("<br />");
+
+$converted = htmlspecialchars(htmlentities($db->real_escape_string(trim($szöv))));
+
+echo $converted;
+$back = htmlspecialchars_decode(html_entity_decode($converted));
+echo "------------------------------------------------------------------------------------------------------------------";
+echo ("<br />");
+
+echo $back;
+
+*/
+
+if (isset($_POST['submit'])) {
+    if (isset($_POST['username'], $_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+
+        $username = htmlspecialchars(htmlentities($db->real_escape_string(trim($_POST['username']))));
+        $password = htmlspecialchars(htmlentities($db->real_escape_string(trim($_POST['password']))));
+
+        if (password_verify($password, $db->query("SELECT `password` FROM `users` WHERE `username` = '{$username}'")->fetch_all()[0][0])) {
+            echo "jó passw";
+        }
+        echo ("<br />");
+
+
+        echo $lekertpass;
+        //$tablelenght = $db->query("SELECT count(*) FROM `users`")->fetch_all()[0][0];
+
+        $nametable = $db->query("SELECT `username` FROM `users`")->fetch_all();
+        $pwtable = $db->query("SELECT `password` FROM `users`")->fetch_all();
+        $vanienfelhnev = false;
+        $vanienpassw = false;
+        foreach ($nametable as $row) {
+            foreach ($row as $item) {
+                if ($beirt == $item) {
+                    $vanienfelhnev = true;
+                }
+            }
+        }
+        foreach ($pwtable as $row) {
+            foreach ($row as $item) {
+                if ($beirt == $item) {
+                    $vanienpassw = true;
+                }
+            }
+        }
+        if ($vanienfelhnev) {
+            echo "van ilyen felh new";
+        } elseif ($vanienpassw) {
+            echo "van ilyen jelszo";
+        } else {
+            echo "jó";
+        }
+
+
+
+        // array_search() --- azt adja vissza hogy haányadik a sorban
+    }
+}
+
+echo ("<br />");
+/*
+echo  $db->query("SELECT count(*) FROM `users`")->fetch_all()[0][0];
+echo ("<br />");
+$nametable = $db->query("SELECT `username` FROM `users`")->fetch_all();
+foreach ($nametable as $row) {
+    for ($i = 0; $i < $db->query("SELECT count(*) FROM `users`")->fetch_all()[0][0]; $i++) {
+        echo $row[$i];
+    }
+    echo ("<br />");
+}*/
+
+
+if (($_FILES['my_file']['name'] != "")) {  //if filename exist (alma.txt)
+    $target_dir = "alma/"; // Where the file is going to be stored (/)
+    $file = $_FILES['my_file']['name']; //file (alma.txt)
+    $path = pathinfo($file); //path of file (website/try/)
+    $filename = $path['filename']; // (alma)
+    $ext = $path['extension']; //extension (.txt)
+    $temp_name = $_FILES['my_file']['tmp_name']; // temporary name
+    $path_filename_ext = $target_dir . $filename . "." . $ext; // full filename (/website/try/alma.txt)
+
+    // Check if file already exists
+    if (file_exists($path_filename_ext)) {
+        echo "Sorry, file already exists.";
+    } else {
+        move_uploaded_file($temp_name, $path_filename_ext);
+        echo "Congratulations! File Uploaded Successfully.";
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!--
+    <form action="<? //php  echo $_SERVER['PHP_SELF'] 
+                    ?>" method="post">
+        <table>
+            <tr>
+                <td>Felhasználónév:</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>Jelszó:</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Bejelentkezés!"></td>
+            </tr>
+        </table>
+    </form>
+-->
+    <form name="form" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+        <input type="file" name="my_file" /><br /><br />
+        <input type="submit" name="submit" value="Upload" />
+    </form>
+</body>
+
+</html>

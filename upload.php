@@ -36,7 +36,6 @@ if ($_SESSION['loggedin'] == false) {
             <h1>Fájl feltöltés</h1>
             <?php
 
-
             if (isset($_POST['submit'])) {
                 if ($_FILES['file']['error'] == 0) {
 
